@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Greenie</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-image: url("https://t3.ftcdn.net/jpg/02/75/90/24/360_F_275902439_Nktda0rSoFCwtIxNDytFz6KAAjHWWczk.jpg");
+      height: 100vh;
+      color: #f7f4f4;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    header, footer {
+      background-color: #3d5d42;
+      color: #121212;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+
+    form {
+      background-color: rgba(252, 88, 88, 0.8);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    label, input {
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    button.close {
+      margin-top: 15px;
+      background-color: #05430a;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #userDetails {
+      display: none;
+      background-color: #721818;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #userDetails h2 {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Greenie</h1>
+  </header>
+  <div class="content">
+    <h1>About Us</h1>
+    <p>
+      Greenie is committed to providing innovative and eco-friendly solutions to make a positive impact on the environment.
+      We believe in sustainable living and aim to empower individuals and businesses to adopt green practices for a better future.
+    </p>
+
+    <h1>Our Mission</h1>
+    <p>
+      Our mission is to promote environmental consciousness by offering products and services that are not only functional but also sustainable.
+      Through continuous research and development, we strive to create a greener world for generations to come.
+    </p>
+
+    <button>Contact Us</button>
+  </div>
+
+  <div class="content">
+    <div class="buttons">
+      <button onclick="showLogin()">Login</button>
+      <button onclick="showRegistration()">Register</button>
+    </div>
+
+    <form id="loginForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <button onclick="login()">Login</button>
+      <button class="close" onclick="closeForm()">Close</button>
+    </form>
+
+    <form id="registrationForm">
+      <label for="newUsername">Username:</label>
+      <input type="text" id="newUsername" name="newUsername" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="newPassword">Password:</label>
+      <input type="password" id="newPassword" name="newPassword" required>
+
+      <button onclick="register()">Register</button>
+      <button class="close" onclick="closeForm()">Close</button>
+    </form>
+
+    <div id="userDetails">
+      <h2>User Details</h2>
+      <p><strong>Username:</strong> <span id="displayUsername"></span></p>
+      <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+    </div>
+  </div>
+
+  <footer>
+    2023 Greenic | Eco-Friendly Solutions
+  </footer>
+
+  <script>
+    function showLogin() {
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('registrationForm').style.display = 'none';
+      document.getElementById('userDetails').style.display = 'none';
+    }
+
+    function showRegistration() {
+      document.getElementById('registrationForm').style.display = 'block';
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('userDetails').style.display = 'none';
+    }
+
+    function closeForm() {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('registrationForm').style.display = 'none';
+      document.getElementById('userDetails').style.display = 'none';
+    }
+
+    function login() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      
+      var users = [
+        { username: 'sai', password: 'sai1', email: 'sai@gmail.com' },
+        { username: 'vamshi', password: 'vamshi1', email: 'vamshi@gmail.com' },
+        { username: 'venkey', password: 'venkey1', email: 'venkey@gmail.com' },
+        { username: 'krishna', password: 'krishna1', email: 'krishna4@gmail.com' },
+        { username: 'manoj', password: 'manoj1', email: 'manoj@gmail.com.com' }
+      ];
+
+      for (var i = 0; i < users.length; i++) {
+        if (username === users[i].username && password === users[i].password) {
+          displayUserDetails(users[i]);
+          return;
+        }
+      }
+
+      alert('Invalid username or password. Please try again.');
+    }
+
+    function register() {
+      var newUsername = document.getElementById('newUsername').value;
+      var email = document.getElementById('email').value;
+      var newPassword = document.getElementById('newPassword').value;
+
+      alert('Registration successfully');
+
+      var newUser = { username: newUsername, email: email };
+      displayUserDetails(newUser);
+    }
+
+    function displayUserDetails(user) {
+      document.getElementById('displayUsername').textContent = user.username;
+      document.getElementById('displayEmail').textContent = user.email;
+      document.getElementById('userDetails').style.display = 'block';
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('registrationForm').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
